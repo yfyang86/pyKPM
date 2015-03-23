@@ -1,0 +1,22 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+Dialog	ReadCodeUI.py	/^    Dialog = QtGui.QDialog()$/;"	v
+Qsci	ReadCodeUI.py	/^from PyQt4 import Qsci$/;"	i
+QtCore	ReadCodeUI.py	/^from PyQt4 import QtCore, QtGui$/;"	i
+QtGui	ReadCodeUI.py	/^from PyQt4 import QtCore, QtGui$/;"	i
+Ui_Dialog	ReadCodeUI.py	/^class Ui_Dialog(object):$/;"	c
+_encoding	ReadCodeUI.py	/^    _encoding = QtGui.QApplication.UnicodeUTF8$/;"	v
+_fromUtf8	ReadCodeUI.py	/^    _fromUtf8 = QtCore.QString.fromUtf8$/;"	v
+_fromUtf8	ReadCodeUI.py	/^    def _fromUtf8(s):$/;"	f
+_translate	ReadCodeUI.py	/^    def _translate(context, text, disambig):$/;"	f
+app	ReadCodeUI.py	/^    app = QtGui.QApplication(sys.argv)$/;"	v
+on_treeview_clicked	ReadCodeUI.py	/^    def on_treeview_clicked(self, index):$/;"	m	class:Ui_Dialog
+retranslateUi	ReadCodeUI.py	/^    def retranslateUi(self, Dialog):$/;"	m	class:Ui_Dialog
+setLex	ReadCodeUI.py	/^    def setLex(self, filename):$/;"	m	class:Ui_Dialog
+setupUi	ReadCodeUI.py	/^    def setupUi(self, Dialog):$/;"	m	class:Ui_Dialog
+sys	ReadCodeUI.py	/^    import sys$/;"	i
+ui	ReadCodeUI.py	/^    ui = Ui_Dialog()$/;"	v

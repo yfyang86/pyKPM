@@ -27,7 +27,7 @@ except AttributeError:
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
-        wikipath = "C:/data"
+        wikipath = "~/git/"
         Dialog.setObjectName(_fromUtf8("Dialog"))
         Dialog.setFixedSize(1200, 800)
         self.gridLayoutWidget = QtGui.QWidget(Dialog)
@@ -87,7 +87,7 @@ class Ui_Dialog(object):
         suffix = self.setLex(fileName)
         if suffix == "cpp":
             self.lexer = Qsci.QsciLexerCPP()
-        elif suffix == "python":
+        elif suffix == "py":
             self.lexer = Qsci.QsciLexerPython()
         elif suffix == "rb":
             self.lexer = Qsci.QsciLexerRuby()
