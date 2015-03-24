@@ -86,18 +86,9 @@ class Ui_Dialog(object):
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
-    def setLex(self, filename):
+    def setLex(self, filename,filePath):
         u = filename.split(".")
-        u = u[len(u)-1]
-        return u
-
-    @QtCore.pyqtSlot(QtCore.QModelIndex)
-    def on_treeview_clicked(self, index):
-        indexItem = self.model.index(index.row(), 0, index.parent())
-        fileName = self.model.fileName(indexItem)
-        filePath = self.model.filePath(indexItem)
-        self.listHistory.addItem(filePath)
-        suffix = self.setLex(fileName)
+        suffix = u[len(u)-1]
         if suffix in ["cpp", "c", "cu"]:
             self.lexer = Qsci.QsciLexerCPP()
         elif suffix == "py" or suffix == "pwc":
@@ -143,8 +134,19 @@ class Ui_Dialog(object):
         self.textEdit.setLexer(self.lexer)
         self.textEdit.setText(open(filePath).read())
 
+        
+    @QtCore.pyqtSlot(QtCore.QModelIndex)
+    def on_treeview_clicked(self, index):
+        indexItem = self.model.index(index.row(), 0, index.parent())
+        fileName = self.model.fileName(indexItem)
+        filePath = self.model.filePath(indexItem)
+        self.listHistory.addItem(filePath)
+        self.setLex(fileName,filePath)
+        
+
     def on_listHist_clicked(self):
         filePath = str(self.listHistory.selectedItems()[0].text())
+        self.setLex(filePath,filePath)
         if filePath != "File History List":
             self.textEdit.setText(open(filePath).read())
 
