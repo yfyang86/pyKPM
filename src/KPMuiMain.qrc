@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="pyKPM_search">
+    <file>uiMain.ico</file>
+    <file>find.ico</file>
+  </qresource>
+</RCC>
