@@ -23,4 +23,7 @@ Left = before. Right = After (scale=170%)
 
 ![COMP](./snapshot1.png)
 
+But the tiny dash grid lines vanishes.
+
+
 
