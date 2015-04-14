@@ -8,11 +8,12 @@
  ```
 
 # Usage
+
 | | |
-|--|--|
-|filename| Png filename |
-|potrace.exepath| potrace exe/bin file path |
-|imagemaick.exepath| ImageMagick convert exe/bin file path |
+|:---|---|
+| filename | Png filename |
+| potrace.exepath | potrace exe/bin file path |
+| imagemaick.exepath | ImageMagick convert exe/bin file path |
 
 # Comparison
 
