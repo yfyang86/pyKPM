@@ -26,8 +26,13 @@ except AttributeError:
 
 
 class Ui_Dialog(object):
+<<<<<<< HEAD
     def setupUi(self, Dialog):
         wikipath = "~/git/"
+=======
+    def setupUi(self, Dialog, wikipath):
+        #wikipath = "D:/code/snip"
+>>>>>>> 4010aee3b183c0835064e95800c5aeb18c7191f0
         Dialog.setObjectName(_fromUtf8("Dialog"))
         Dialog.setFixedSize(1200, 800)
         self.gridLayoutWidget = QtGui.QWidget(Dialog)
@@ -37,16 +42,16 @@ class Ui_Dialog(object):
         self.gridLayout.setContentsMargins(0, -1, -1, -1)
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
         self.treeview = QtGui.QTreeView(self.gridLayoutWidget)
-        self.treeview.setMaximumSize(QtCore.QSize(400, 1200))
+        self.treeview.setMaximumSize(QtCore.QSize(300, 600))
         self.treeview.setObjectName(_fromUtf8("Project Tree View."))
         self.gridLayout.addWidget(self.treeview, 1, 1, 1, 1)
         # TEXTEDIT
         self.textEdit = Qsci.QsciScintilla(self.gridLayoutWidget)
-        self.textEdit.setMinimumSize(QtCore.QSize(780, 750))
-        self.textEdit.setMaximumSize(QtCore.QSize(780, 750))
+        self.textEdit.setMinimumSize(QtCore.QSize(780, 763))
+        self.textEdit.setMaximumSize(QtCore.QSize(780, 763))
         self.textEdit.setCaretLineVisible(True)
         self.textEdit.setCaretLineBackgroundColor(QtGui.QColor("#A9D0F5"))
-        self.textEdit.setMarginWidth(0, 30)
+        self.textEdit.setMarginWidth(0, 35)
         self.textEdit.setMarginLineNumbers(0, True)
         self.textEdit.setMarginsBackgroundColor(QtGui.QColor("#FE9A2E"))
         self.textEdit.setToolTip(_fromUtf8(""))
@@ -54,10 +59,17 @@ class Ui_Dialog(object):
         self.textEdit.setObjectName(_fromUtf8("textEdit"))
         self.textEdit.setAutoCompletionThreshold(1)
         self.textEdit.setAutoCompletionSource(Qsci.QsciScintilla.AcsAPIs)
+        self.textEdit.setEdgeMode(Qsci.QsciScintilla.EDGE_LINE)
+        self.textEdit.setEdgeColumn(106)
+        self.textEdit.setEdgeColor(QtGui.QColor("#3399FF"))
+        self.textEdit.setFolding(Qsci.QsciScintilla.BoxedTreeFoldStyle)
+        self.textEdit.setBraceMatching(Qsci.QsciScintilla.SloppyBraceMatch)
+        self.textEdit.setFoldMarginColors(QtGui.QColor("#40BCFF"),QtGui.QColor("#AEAEAE"))
         # Tree View
         self.model = QtGui.QFileSystemModel()
         self.model.setRootPath(wikipath)
         self.treeview.setModel(self.model)
+        self.treeview.setRootIndex(self.model.index(wikipath))
         self.treeview.clicked.connect(self.on_treeview_clicked)
         "DEMO"
         self.gridLayout.addWidget(self.textEdit, 0, 2, 2, 5)
@@ -65,44 +77,63 @@ class Ui_Dialog(object):
         self.Statuslabel.setObjectName(_fromUtf8("Statuslabel"))
         self.gridLayout.addWidget(self.Statuslabel, 2, 2, 1, 1)
         self.calendarWidget = QtGui.QCalendarWidget(self.gridLayoutWidget)
-        self.calendarWidget.setMaximumSize(QtCore.QSize(400, 200))
+        self.calendarWidget.setMaximumSize(QtCore.QSize(300, 180))
         self.calendarWidget.setObjectName(_fromUtf8("calendarWidget"))
         self.gridLayout.addWidget(self.calendarWidget, 0, 1, 1, 1)
+        # set LIST: history
+        self.listHistory = QtGui.QListWidget(Dialog)
+        self.listHistory.setObjectName(_fromUtf8("listHistory"))
+        self.gridLayout.addWidget(self.listHistory, 0,8,2,1)
+        self.listHistory.setFixedSize(QtCore.QSize(200, 763))
+        self.listHistory.addItem("File History List")
+        self.listHistory.clicked.connect(self.on_listHist_clicked)
         # Set Dialog
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
-    def setLex(self, filename):
+    def setLex(self, filename,filePath):
         u = filename.split(".")
-        u = u[len(u)-1]
-        return u
-
-    @QtCore.pyqtSlot(QtCore.QModelIndex)
-    def on_treeview_clicked(self, index):
-        indexItem = self.model.index(index.row(), 0, index.parent())
-        fileName = self.model.fileName(indexItem)
-        filePath = self.model.filePath(indexItem)
-        print filePath
-        print fileName
-        suffix = self.setLex(fileName)
-        if suffix == "cpp":
+        suffix = u[len(u)-1]
+        if suffix in ["cpp", "c", "cu"]:
             self.lexer = Qsci.QsciLexerCPP()
+<<<<<<< HEAD
         elif suffix == "py":
+=======
+        elif suffix == "py" or suffix == "pwc":
+>>>>>>> 4010aee3b183c0835064e95800c5aeb18c7191f0
             self.lexer = Qsci.QsciLexerPython()
         elif suffix == "rb":
             self.lexer = Qsci.QsciLexerRuby()
-        elif suffix == "c":
-            self.lexer = Qsci.QsciLexerCPP()
         elif suffix == "cs":
             self.lexer = Qsci.QsciLexerCSharp()
         elif suffix == "css":
             self.lexer = Qsci.QsciLexerCSS()
         elif suffix == "r" or suffix == "R":
-            self.lexer = Qsci.QsciLexerRuby()
+            self.lexer = Qsci.QsciLexerLua()
         elif suffix == "java" or suffix == "jwc":
             self.lexer = Qsci.QsciLexerJava()
-        else:
+        elif suffix == "html" or suffix == "htm":
+            self.lexer = Qsci.QsciLexerHTML()
+        elif suffix == "make" or suffix == "htm":
+            self.lexer = Qsci.QsciLexerCMake()
+        elif suffix in ["cmd", "sh", "bat"]:
             self.lexer = Qsci.QsciLexerBatch()
+        elif suffix == "diff":
+            self.lexer = Qsci.QsciLexerDiff()
+        elif suffix in ["f", "f90"]:
+            self.lexer = Qsci.QsciLexerFortran()
+        elif suffix in ["m", "mat"]:
+            self.lexer = Qsci.QsciLexerMatlab()
+        elif suffix in ["pl", "PL"]:
+            self.lexer = Qsci.QsciLexerPerl()
+        elif suffix in ["tex", "toc", "cls", "sty"]:
+            self.lexer = Qsci.QsciLexerTeX()
+        elif suffix == "sql":
+            self.lexer = Qsci.QsciLexerSQL()
+        elif suffix in ["xml2", "xml"]:
+            self.lexer = Qsci.QsciLexerXML()
+        else:
+            self.lexer = Qsci.QsciLexerProperties()
         self.api = Qsci.QsciAPIs(self.lexer)
         self.api.add("aLongString")
         self.api.add("aLongerString")
@@ -112,17 +143,35 @@ class Ui_Dialog(object):
         self.textEdit.setLexer(self.lexer)
         self.textEdit.setText(open(filePath).read())
 
+        
+    @QtCore.pyqtSlot(QtCore.QModelIndex)
+    def on_treeview_clicked(self, index):
+        indexItem = self.model.index(index.row(), 0, index.parent())
+        fileName = self.model.fileName(indexItem)
+        filePath = self.model.filePath(indexItem)
+        self.listHistory.addItem(filePath)
+        self.setLex(fileName,filePath)
+        
+
+    def on_listHist_clicked(self):
+        filePath = str(self.listHistory.selectedItems()[0].text())
+        self.setLex(filePath,filePath)
+        if filePath != "File History List":
+            self.textEdit.setText(open(filePath).read())
+
     def retranslateUi(self, Dialog):
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog", None))
-        self.Statuslabel.setText(_translate("Dialog", "Status", None))
+        Dialog.setWindowTitle(_translate("Code Reader", "Code Reader", None))
+        Dialog.setWindowIcon(QtGui.QIcon("code.ico"))
+        self.Statuslabel.setText(_translate("Dialog", "Status: Development Version 0.0.1", None))
 
 from PyQt4 import Qsci
 
+# demo Exmample
 if __name__ == "__main__":
     import sys
     app = QtGui.QApplication(sys.argv)
     Dialog = QtGui.QDialog()
     ui = Ui_Dialog()
-    ui.setupUi(Dialog)
+    ui.setupUi(Dialog, "/homr/yifan")
     Dialog.show()
     sys.exit(app.exec_())
